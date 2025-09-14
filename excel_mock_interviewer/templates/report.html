@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Report - AI Excel Mock Interviewer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { font-size: 12pt; }
+        }
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b no-print">
+        <div class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-chart-line text-2xl text-green-600"></i>
+                    <h1 class="text-2xl font-bold text-gray-900">Interview Performance Report</h1>
+                </div>
+                <div class="flex space-x-3">
+                    <button onclick="window.print()" class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200">
+                        <i class="fas fa-print mr-2"></i>Print
+                    </button>
+                    <button onclick="window.close()" class="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition duration-200">
+                        <i class="fas fa-times mr-2"></i>Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="max-w-6xl mx-auto px-4 py-6">
+        <!-- Loading State -->
+        <div id="loadingState" class="text-center py-12">
+            <i class="fas fa-spinner fa-spin text-4xl text-blue-600 mb-4"></i>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Generating Your Report...</h2>
+            <p class="text-gray-600">Please wait while we analyze your performance.</p>
+        </div>
+
+        <!-- Report Content -->
+        <div id="reportContent" class="hidden">
+            <!-- Summary Card -->
+            <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-3">
+                            <i class="fas fa-user text-blue-600 text-xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-gray-900" id="candidateName">-</h3>
+                        <p class="text-sm text-gray-600" id="targetRole">-</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-3">
+                            <i class="fas fa-percentage text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900" id="overallScore">0%</h3>
+                        <p class="text-sm text-gray-600">Overall Score</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-purple-100 rounded-full mb-3">
+                            <i class="fas fa-questions text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900" id="questionsAnswered">0</h3>
+                        <p class="text-sm text-gray-600">Questions Answered</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="inline-flex items-center justify-center w-16 h-16 bg-orange-100 rounded-full mb-3">
+                            <i class="fas fa-clock text-orange-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900" id="interviewDuration">0m</h3>
+                        <p class="text-sm text-gray-600">Duration</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Skill Breakdown -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- Skill Areas Chart -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">
+                        <i class="fas fa-chart-radar text-blue-600 mr-2"></i>
+                        Skill Areas Breakdown
+                    </h2>
+                    <canvas id="skillsChart" width="400" height="400"></canvas>
+                </div>
+
+                <!-- Progress Bars -->
+                <div class="bg-white rounded-lg shadow-sm border p-6">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-4">
+                        <i class="fas fa-chart-bar text-green-600 mr-2"></i>
+                        Detailed Scores
+                    </h2>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Technical Accuracy</span>
+                                <span class="text-sm text-gray-600" id="technicalScore">0/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar bg-blue-600 h-2 rounded-full" id="technicalBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Practical Application</span>
+                                <span class="text-sm text-gray-600" id="practicalScore">0/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar bg-green-600 h-2 rounded-full" id="practicalBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Communication</span>
+                                <span class="text-sm text-gray-600" id="communicationScore">0/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar bg-yellow-600 h-2 rounded-full" id="communicationBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Advanced Knowledge</span>
+                                <span class="text-sm text-gray-600" id="advancedScore">0/10</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar bg-purple-600 h-2 rounded-full" id="advancedBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Report -->
+            <div class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">
+                    <i class="fas fa-file-alt text-blue-600 mr-2"></i>
+                    Detailed Analysis
+                </h2>
+                <div class="prose max-w-none">
+                    <div id="detailedReport" class="whitespace-pre-wrap text-gray-700 leading-relaxed">
+                        Loading detailed analysis...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question-by-Question Breakdown -->
+            <div class="bg-white rounded-lg shadow-sm border p-6">
+                <h2 class="text-xl font-semibold text-gray-900 mb-4">
+                    <i class="fas fa-list text-green-600 mr-2"></i>
+                    Question-by-Question Review
+                </h2>
+                <div id="questionBreakdown" class="space-y-4">
+                    <!-- Questions will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden text-center py-12">
+            <i class="fas fa-exclamation-triangle text-4xl text-red-600 mb-4"></i>
+            <h2 class="text-xl font-semibold text-gray-900 mb-2">Unable to Load Report</h2>
+            <p class="text-gray-600">There was an error loading your interview report. Please try again later.</p>
+        </div>
+    </div>
+
+    <script>
+        const interviewId = '{{ interview_id }}';
+        let skillsChart = null;
+
+        async function loadReport() {
+            try {
+                const response = await fetch(`/api/interview/report/${interviewId}`);
+                const data = await response.json();
+
+                if (data.success) {
+                    populateReport(data.report);
+                    document.getElementById('loadingState').classList.add('hidden');
+                    document.getElementById('reportContent').classList.remove('hidden');
+                } else {
+                    throw new Error(data.error || 'Failed to load report');
+                }
+            } catch (error) {
+                console.error('Error loading report:', error);
+                document.getElementById('loadingState').classList.add('hidden');
+                document.getElementById('errorState').classList.remove('hidden');
+            }
+        }
+
+        function populateReport(report) {
+            // Basic info
+            document.getElementById('candidateName').textContent = report.candidate_name;
+            document.getElementById('targetRole').textContent = report.target_role;
+            document.getElementById('overallScore').textContent = `${Math.round(report.percentage_score)}%`;
+            document.getElementById('questionsAnswered').textContent = report.questions_answered;
+            document.getElementById('interviewDuration').textContent = report.interview_duration;
+
+            // Detailed report
+            document.getElementById('detailedReport').textContent = report.detailed_report;
+
+            // Skill breakdown
+            const skills = report.skill_breakdown || {};
+            updateSkillBar('technical', skills.technical_accuracy || 0);
+            updateSkillBar('practical', skills.practical_application || 0);
+            updateSkillBar('communication', skills.communication || 0);
+            updateSkillBar('advanced', skills.advanced_knowledge || 0);
+
+            // Create radar chart
+            createSkillsChart(skills);
+
+            // Populate question breakdown
+            populateQuestionBreakdown(report.evaluations || []);
+        }
+
+        function updateSkillBar(skill, score) {
+            const percentage = (score / 10) * 100;
+            document.getElementById(`${skill}Score`).textContent = `${score.toFixed(1)}/10`;
+            
+            setTimeout(() => {
+                document.getElementById(`${skill}Bar`).style.width = `${percentage}%`;
+            }, 500);
+        }
+
+        function createSkillsChart(skills) {
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            
+            if (skillsChart) {
+                skillsChart.destroy();
+            }
+
+            skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Technical Accuracy',
+                        'Practical Application',
+                        'Communication',
+                        'Advanced Knowledge'
+                    ],
+                    datasets: [{
+                        label: 'Your Score',
+                        data: [
+                            skills.technical_accuracy || 0,
+                            skills.practical_application || 0,
+                            skills.communication || 0,
+                            skills.advanced_knowledge || 0
+                        ],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgb(59, 130, 246)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 10,
+                            ticks: {
+                                stepSize: 2
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        function populateQuestionBreakdown(evaluations) {
+            const container = document.getElementById('questionBreakdown');
+            
+            evaluations.forEach((eval, index) => {
+                const scoreColor = eval.score >= 8 ? 'text-green-600' : 
+                                eval.score >= 6 ? 'text-yellow-600' : 'text-red-600';
+                
+                const scoreIcon = eval.score >= 8 ? 'fa-check-circle text-green-600' : 
+                                eval.score >= 6 ? 'fa-minus-circle text-yellow-600' : 'fa-times-circle text-red-600';
+
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'border border-gray-200 rounded-lg p-4';
+                questionDiv.innerHTML = `
+                    <div class="flex items-start justify-between mb-3">
+                        <h3 class="font-semibold text-gray-900">Question ${index + 1}</h3>
+                        <div class="flex items-center space-x-2">
+                            <i class="fas ${scoreIcon}"></i>
+                            <span class="font-bold ${scoreColor}">${eval.score}/10</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <p class="text-gray-700 font-medium mb-2">Question:</p>
+                        <p class="text-gray-600 italic">"${eval.question}"</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <p class="text-gray-700 font-medium mb-2">Your Answer:</p>
+                        <p class="text-gray-600 bg-gray-50 p-3 rounded-md">${eval.answer}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <p class="text-gray-700 font-medium mb-2">Feedback:</p>
+                        <p class="text-gray-600">${eval.feedback}</p>
+                    </div>
+                    
+                    ${eval.strengths && eval.strengths.length > 0 ? `
+                    <div class="mb-2">
+                        <p class="text-green-700 font-medium mb-1">Strengths:</p>
+                        <ul class="list-disc list-inside text-green-600 text-sm">
+                            ${eval.strengths.map(strength => `<li>${strength}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                    
+                    ${eval.improvements && eval.improvements.length > 0 ? `
+                    <div>
+                        <p class="text-orange-700 font-medium mb-1">Areas for Improvement:</p>
+                        <ul class="list-disc list-inside text-orange-600 text-sm">
+                            ${eval.improvements.map(improvement => `<li>${improvement}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                `;
+                
+                container.appendChild(questionDiv);
+            });
+        }
+
+        // Load report when page loads
+        document.addEventListener('DOMContentLoaded', loadReport);
+    </script>
+</body>
+</html>

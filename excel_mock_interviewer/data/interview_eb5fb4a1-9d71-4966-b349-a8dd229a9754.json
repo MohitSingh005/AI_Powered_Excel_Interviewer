@@ -1,0 +1,251 @@
+{
+  "id": "eb5fb4a1-9d71-4966-b349-a8dd229a9754",
+  "candidate_name": "Mohit Singh",
+  "target_role": "Data Analyst",
+  "experience_level": "beginner",
+  "status": "completed",
+  "current_phase": "conclusion",
+  "current_difficulty": "basic",
+  "question_count": 8,
+  "score": 56,
+  "start_time": "2025-09-14T07:24:10.633774+00:00",
+  "end_time": "2025-09-14T07:30:01.877873+00:00",
+  "messages": [
+    {
+      "role": "candidate",
+      "content": "Yes",
+      "timestamp": "2025-09-14T07:24:17.738837+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "Perfect! Let's start with our first question:\n\n**Question 1:** What is the difference between a relative and absolute cell reference in Excel?",
+      "timestamp": "2025-09-14T07:24:17.738837+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "In Excel, a relative cell reference (like A1) changes automatically when you copy or move a formula to another cell, meaning it adjusts based on its new position. An absolute cell reference (like $A$1), on the other hand, always points to the exact same cell, no matter where the formula is copied or moved. There are also mixed references\u2014for example, $A1 locks only the column while allowing the row to change, and A$1 locks only the row while allowing the column to change. In short, relative references move with the formula, while absolute references stay fixed.",
+      "timestamp": "2025-09-14T07:25:30.538128+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 2:** How would you use the SUM function to calculate the total of cells A1 through A10?",
+      "timestamp": "2025-09-14T07:25:31.740465+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "You would use the SUM function like this:  =SUM(A1:A10)   This formula adds up all the values from cell A1 through A10 and returns the total.",
+      "timestamp": "2025-09-14T07:26:13.088594+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 3:** Explain the purpose of Excel's AutoSum feature and how to use it.",
+      "timestamp": "2025-09-14T07:26:13.439691+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "Excel\u2019s AutoSum feature is designed to quickly calculate totals and other common functions without manually typing formulas. By selecting a cell and clicking the AutoSum (\u03a3) button on the Home or Formulas tab, Excel automatically suggests a range of cells to sum\u2014usually the ones directly above or to the left of the active cell. Pressing Enter confirms the selection and inserts the formula. While AutoSum defaults to the SUM function, its drop-down menu also allows you to apply functions like AVERAGE, COUNT, MAX, and MIN. This makes it a fast and convenient way to perform frequent calculations.",
+      "timestamp": "2025-09-14T07:26:56.551702+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 4:** What is the shortcut to copy a cell in Excel?",
+      "timestamp": "2025-09-14T07:26:57.548147+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "The shortcut to copy a cell in Excel is Ctrl + C.  After selecting the cell(s) you want to copy, press Ctrl + C, then move to the destination and use Ctrl + V to paste.",
+      "timestamp": "2025-09-14T07:27:24.300625+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 5:** How do you format a cell to display numbers as currency?",
+      "timestamp": "2025-09-14T07:27:25.279854+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "To format a cell in Excel to display numbers as currency, you first select the cell or range of cells, then either press Ctrl + 1 to open the Format Cells dialog or go to the Home tab and click the Number Format drop-down menu in the Number group. From there, choose Currency (or Accounting, if preferred). You can then specify the currency symbol (such as $, \u20b9, \u00a3, or \u20ac), the number of decimal places, and how negative numbers should be displayed. Once applied, the selected numbers will appear with the chosen currency symbol and formatting.",
+      "timestamp": "2025-09-14T07:27:45.097359+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 6:** What is the difference between a relative and absolute cell reference in Excel?",
+      "timestamp": "2025-09-14T07:27:46.667569+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "In Excel, a relative cell reference (like A1) changes automatically when you copy or move a formula to another cell, meaning the reference adjusts based on its new position. An absolute cell reference (like $A$1) always points to the exact same cell, regardless of where the formula is copied or moved. There are also mixed references\u2014for example, $A1 locks the column while allowing the row to change, and A$1 locks the row while allowing the column to change. In short, relative references shift with the formula, while absolute references remain fixed.",
+      "timestamp": "2025-09-14T07:28:37.010092+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 7:** What is the difference between a relative and absolute cell reference in Excel?",
+      "timestamp": "2025-09-14T07:28:38.238030+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "In Excel, a relative cell reference (like A1) changes automatically when you copy or move a formula to another cell, meaning the reference adjusts based on its new position. An absolute cell reference (like $A$1) always points to the exact same cell, regardless of where the formula is copied or moved. There are also mixed references\u2014for example, $A1 locks the column while allowing the row to change, and A$1 locks the row while allowing the column to change. In short, relative references shift with the formula, while absolute references remain fixed.",
+      "timestamp": "2025-09-14T07:28:46.555496+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "\ud83d\udc4c Decent answer, but there's room for improvement.\n\n**Question 8:** What is the difference between a relative and absolute cell reference in Excel?",
+      "timestamp": "2025-09-14T07:29:48.447471+00:00"
+    },
+    {
+      "role": "candidate",
+      "content": "Already done",
+      "timestamp": "2025-09-14T07:30:01.243324+00:00"
+    },
+    {
+      "role": "interviewer",
+      "content": "Thank you for that answer! I have enough information to provide you with feedback.\n\nLet me generate your performance report...",
+      "timestamp": "2025-09-14T07:30:01.877873+00:00"
+    }
+  ],
+  "evaluations": [
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "In Excel, a relative cell reference (like A1) changes automatically when you copy or move a formula to another cell, meaning it adjusts based on its new position. An absolute cell reference (like $A$1), on the other hand, always points to the exact same cell, no matter where the formula is copied or moved. There are also mixed references\u2014for example, $A1 locks only the column while allowing the row to change, and A$1 locks only the row while allowing the column to change. In short, relative references move with the formula, while absolute references stay fixed.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "You would use the SUM function like this:  =SUM(A1:A10)   This formula adds up all the values from cell A1 through A10 and returns the total.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "Excel\u2019s AutoSum feature is designed to quickly calculate totals and other common functions without manually typing formulas. By selecting a cell and clicking the AutoSum (\u03a3) button on the Home or Formulas tab, Excel automatically suggests a range of cells to sum\u2014usually the ones directly above or to the left of the active cell. Pressing Enter confirms the selection and inserts the formula. While AutoSum defaults to the SUM function, its drop-down menu also allows you to apply functions like AVERAGE, COUNT, MAX, and MIN. This makes it a fast and convenient way to perform frequent calculations.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "The shortcut to copy a cell in Excel is Ctrl + C.  After selecting the cell(s) you want to copy, press Ctrl + C, then move to the destination and use Ctrl + V to paste.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "To format a cell in Excel to display numbers as currency, you first select the cell or range of cells, then either press Ctrl + 1 to open the Format Cells dialog or go to the Home tab and click the Number Format drop-down menu in the Number group. From there, choose Currency (or Accounting, if preferred). You can then specify the currency symbol (such as $, \u20b9, \u00a3, or \u20ac), the number of decimal places, and how negative numbers should be displayed. Once applied, the selected numbers will appear with the chosen currency symbol and formatting.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "In Excel, a relative cell reference (like A1) changes automatically when you copy or move a formula to another cell, meaning the reference adjusts based on its new position. An absolute cell reference (like $A$1) always points to the exact same cell, regardless of where the formula is copied or moved. There are also mixed references\u2014for example, $A1 locks the column while allowing the row to change, and A$1 locks the row while allowing the column to change. In short, relative references shift with the formula, while absolute references remain fixed.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "In Excel, a relative cell reference (like A1) changes automatically when you copy or move a formula to another cell, meaning the reference adjusts based on its new position. An absolute cell reference (like $A$1) always points to the exact same cell, regardless of where the formula is copied or moved. There are also mixed references\u2014for example, $A1 locks the column while allowing the row to change, and A$1 locks the row while allowing the column to change. In short, relative references shift with the formula, while absolute references remain fixed.",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    },
+    {
+      "score": 5,
+      "points": 7,
+      "technical_accuracy": 5,
+      "practical_application": 5,
+      "communication": 5,
+      "advanced_knowledge": 5,
+      "feedback": "Unable to provide detailed feedback due to technical issue.",
+      "strengths": [
+        "Provided a response"
+      ],
+      "improvements": [
+        "Could provide more detail"
+      ],
+      "question": "",
+      "answer": "Already done",
+      "error": "Error code: 400 - {'error': {'message': 'The model `llama-3.1-70b-versatile` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}"
+    }
+  ]
+}

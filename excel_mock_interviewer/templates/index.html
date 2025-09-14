@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Excel Mock Interviewer</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .chat-container {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        .message {
+            animation: fadeIn 0.3s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .typing-indicator {
+            display: none;
+        }
+        .typing-indicator.show {
+            display: flex;
+        }
+        .dot {
+            height: 8px;
+            width: 8px;
+            margin: 0 2px;
+            background-color: #6b7280;
+            border-radius: 50%;
+            display: inline-block;
+            animation: typing 1.4s infinite ease-in-out both;
+        }
+        .dot:nth-child(1) { animation-delay: -0.32s; }
+        .dot:nth-child(2) { animation-delay: -0.16s; }
+        @keyframes typing {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-4xl mx-auto px-4 py-4">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-robot text-2xl text-blue-600"></i>
+                <h1 class="text-2xl font-bold text-gray-900">AI Excel Mock Interviewer</h1>
+            </div>
+            <p class="text-gray-600 mt-1">Assess your Excel skills with AI-powered interview simulation</p>
+        </div>
+    </header>
+
+    <div class="max-w-4xl mx-auto px-4 py-6">
+        <!-- Interview Setup Form -->
+        <div id="setupForm" class="bg-white rounded-lg shadow-sm border p-6 mb-6">
+            <h2 class="text-xl font-semibold text-gray-900 mb-4">
+                <i class="fas fa-user-circle text-blue-600 mr-2"></i>
+                Interview Setup
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label for="candidateName" class="block text-sm font-medium text-gray-700 mb-2">
+                        Full Name *
+                    </label>
+                    <input type="text" id="candidateName" 
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter your full name" required>
+                </div>
+                
+                <div>
+                    <label for="targetRole" class="block text-sm font-medium text-gray-700 mb-2">
+                        Target Role *
+                    </label>
+                    <select id="targetRole" 
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">Select a role</option>
+                        <option value="Financial Analyst">Financial Analyst</option>
+                        <option value="Data Analyst">Data Analyst</option>
+                        <option value="Operations Analyst">Operations Analyst</option>
+                        <option value="Business Analyst">Business Analyst</option>
+                        <option value="Accountant">Accountant</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <label for="experienceLevel" class="block text-sm font-medium text-gray-700 mb-2">
+                    Excel Experience Level
+                </label>
+                <select id="experienceLevel" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="beginner">Beginner (0-1 years)</option>
+                    <option value="intermediate" selected>Intermediate (2-4 years)</option>
+                    <option value="advanced">Advanced (5+ years)</option>
+                </select>
+            </div>
+            
+            <div class="mt-6">
+                <button id="startInterview" 
+                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200 font-medium">
+                    <i class="fas fa-play mr-2"></i>
+                    Start Interview
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div id="chatInterface" class="hidden bg-white rounded-lg shadow-sm border">
+            <!-- Chat Header -->
+            <div class="px-6 py-4 border-b bg-gray-50 rounded-t-lg">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="fas fa-robot text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-gray-900">AI Interviewer</h3>
+                            <p class="text-sm text-gray-600" id="interviewStatus">Ready to start</p>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-500">
+                        Question <span id="questionCounter">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="messagesContainer" class="chat-container px-6 py-4 space-y-4">
+                <!-- Messages will be added here dynamically -->
+            </div>
+
+            <!-- Typing Indicator -->
+            <div id="typingIndicator" class="typing-indicator px-6 pb-4">
+                <div class="flex items-center space-x-2 text-gray-500">
+                    <div class="flex space-x-1">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                    <span class="text-sm">AI is thinking...</span>
+                </div>
+            </div>
+
+            <!-- Message Input -->
+            <div class="px-6 py-4 border-t bg-gray-50 rounded-b-lg">
+                <div class="flex space-x-3">
+                    <input type="text" id="messageInput" 
+                           class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Type your answer here..." disabled>
+                    <button id="sendMessage" 
+                            class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed"
+                            disabled>
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Report Section -->
+        <div id="reportSection" class="hidden mt-6 bg-white rounded-lg shadow-sm border p-6">
+            <div class="text-center">
+                <i class="fas fa-chart-line text-4xl text-green-600 mb-4"></i>
+                <h2 class="text-2xl font-semibold text-gray-900 mb-2">Interview Complete!</h2>
+                <p class="text-gray-600 mb-4">Your performance report is being generated...</p>
+                <button id="viewReport" class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition duration-200">
+                    <i class="fas fa-file-alt mr-2"></i>
+                    View Detailed Report
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentInterviewId = null;
+        let questionCount = 0;
+
+        // DOM Elements
+        const setupForm = document.getElementById('setupForm');
+        const chatInterface = document.getElementById('chatInterface');
+        const reportSection = document.getElementById('reportSection');
+        const startInterviewBtn = document.getElementById('startInterview');
+        const messageInput = document.getElementById('messageInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const messagesContainer = document.getElementById('messagesContainer');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const questionCounter = document.getElementById('questionCounter');
+        const interviewStatus = document.getElementById('interviewStatus');
+        const viewReportBtn = document.getElementById('viewReport');
+
+        // Start Interview
+        startInterviewBtn.addEventListener('click', async () => {
+            const candidateName = document.getElementById('candidateName').value.trim();
+            const targetRole = document.getElementById('targetRole').value;
+            const experienceLevel = document.getElementById('experienceLevel').value;
+
+            if (!candidateName || !targetRole) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            startInterviewBtn.disabled = true;
+            startInterviewBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Starting...';
+
+            try {
+                const response = await fetch('/api/interview/start', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        candidate_name: candidateName,
+                        target_role: targetRole,
+                        experience_level: experienceLevel
+                    })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    currentInterviewId = data.interview_id;
+                    setupForm.classList.add('hidden');
+                    chatInterface.classList.remove('hidden');
+                    
+                    addMessage(data.message, 'interviewer');
+                    messageInput.disabled = false;
+                    sendMessageBtn.disabled = false;
+                    interviewStatus.textContent = 'Interview in progress';
+                    
+                    messageInput.focus();
+                } else {
+                    throw new Error(data.error || 'Failed to start interview');
+                }
+            } catch (error) {
+                alert('Error starting interview: ' + error.message);
+                startInterviewBtn.disabled = false;
+                startInterviewBtn.innerHTML = '<i class="fas fa-play mr-2"></i>Start Interview';
+            }
+        });
+
+        // Send Message
+        async function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            addMessage(message, 'candidate');
+            messageInput.value = '';
+            messageInput.disabled = true;
+            sendMessageBtn.disabled = true;
+            showTypingIndicator();
+
+            try {
+                const response = await fetch('/api/interview/message', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        interview_id: currentInterviewId
+                    })
+                });
+
+                const data = await response.json();
+                hideTypingIndicator();
+
+                if (data.success) {
+                    addMessage(data.message, 'interviewer');
+                    
+                    // Check if interview is complete
+                    if (data.message.includes('performance report')) {
+                        completeInterview();
+                    } else {
+                        messageInput.disabled = false;
+                        sendMessageBtn.disabled = false;
+                        messageInput.focus();
+                        questionCount++;
+                        questionCounter.textContent = questionCount;
+                    }
+                } else {
+                    throw new Error(data.error || 'Failed to send message');
+                }
+            } catch (error) {
+                hideTypingIndicator();
+                alert('Error sending message: ' + error.message);
+                messageInput.disabled = false;
+                sendMessageBtn.disabled = false;
+            }
+        }
+
+        sendMessageBtn.addEventListener('click', sendMessage);
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !sendMessageBtn.disabled) {
+                sendMessage();
+            }
+        });
+
+        // Add message to chat
+        function addMessage(content, role) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message flex ${role === 'candidate' ? 'justify-end' : 'justify-start'}`;
+            
+            const isInterviewer = role === 'interviewer';
+            const bgColor = isInterviewer ? 'bg-gray-100' : 'bg-blue-600 text-white';
+            const icon = isInterviewer ? 'fa-robot' : 'fa-user';
+            
+            messageDiv.innerHTML = `
+                <div class="flex items-start space-x-2 max-w-xs lg:max-w-md">
+                    ${isInterviewer ? `<div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <i class="fas ${icon} text-white text-sm"></i>
+                    </div>` : ''}
+                    <div class="${bgColor} rounded-lg px-4 py-2">
+                        <div class="whitespace-pre-wrap">${content}</div>
+                    </div>
+                    ${!isInterviewer ? `<div class="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                        <i class="fas ${icon} text-gray-600 text-sm"></i>
+                    </div>` : ''}
+                </div>
+            `;
+            
+            messagesContainer.appendChild(messageDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function showTypingIndicator() {
+            typingIndicator.classList.add('show');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function hideTypingIndicator() {
+            typingIndicator.classList.remove('show');
+        }
+
+        function completeInterview() {
+            chatInterface.classList.add('hidden');
+            reportSection.classList.remove('hidden');
+            interviewStatus.textContent = 'Interview completed';
+        }
+
+        // View Report
+        viewReportBtn.addEventListener('click', () => {
+            if (currentInterviewId) {
+                window.open(`/report/${currentInterviewId}`, '_blank');
+            }
+        });
+    </script>
+</body>
+</html>

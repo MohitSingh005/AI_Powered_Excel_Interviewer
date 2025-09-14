@@ -1,0 +1,147 @@
+{
+  "id": "sample-001",
+  "candidate_name": "Sarah Johnson",
+  "target_role": "Financial Analyst",
+  "experience_level": "intermediate",
+  "status": "completed",
+  "current_phase": "conclusion",
+  "current_difficulty": "intermediate",
+  "question_count": 5,
+  "score": 32,
+  "start_time": "2024-01-15T14:30:00Z",
+  "end_time": "2024-01-15T14:47:30Z",
+  "messages": [
+    {
+      "role": "interviewer",
+      "content": "Hello Sarah! 👋\n\nWelcome to the AI-Powered Excel Mock Interviewer. I'm here to assess your Excel skills for the Financial Analyst position.\n\n**How this works:**\n• I'll ask you a series of Excel-related questions\n• Questions will progress from basic to advanced based on your performance\n• Please explain your answers thoroughly - I'm evaluating both technical knowledge and communication\n• The interview will take about 15-20 minutes\n\n**What I'm looking for:**\n• Technical accuracy of Excel concepts\n• Practical application knowledge\n• Clear communication of your thought process\n• Best practices awareness\n\nAre you ready to begin? Just type \"yes\" or \"ready\" when you're set to start!",
+      "timestamp": "2024-01-15T14:30:00Z"
+    },
+    {
+      "role": "candidate",
+      "content": "Yes, I'm ready to start!",
+      "timestamp": "2024-01-15T14:30:15Z"
+    },
+    {
+      "role": "interviewer",
+      "content": "Perfect! Let's start with our first question:\n\n**Question 1:** What is the difference between a relative and absolute cell reference in Excel?",
+      "timestamp": "2024-01-15T14:30:20Z"
+    },
+    {
+      "role": "candidate",
+      "content": "A relative cell reference changes when you copy the formula to another cell. For example, if I have =A1+B1 in cell C1 and copy it to C2, it becomes =A2+B2. An absolute reference uses dollar signs like $A$1 and stays the same when copied. So $A$1+$B$1 would remain the same in any cell. You can also have mixed references like $A1 or A$1 where only the column or row is absolute.",
+      "timestamp": "2024-01-15T14:31:45Z"
+    },
+    {
+      "role": "interviewer",
+      "content": "✅ Excellent answer! You demonstrate strong Excel knowledge.\n\n**Question 2:** Explain how VLOOKUP works and provide an example scenario where you'd use it.",
+      "timestamp": "2024-01-15T14:32:00Z"
+    },
+    {
+      "role": "candidate",
+      "content": "VLOOKUP searches for a value in the first column of a table and returns a value from a specified column in the same row. The syntax is VLOOKUP(lookup_value, table_array, col_index_num, range_lookup). For example, if I have employee data and want to find someone's department based on their ID, I'd use =VLOOKUP(A2,Employees!A:D,3,FALSE) where A2 is the employee ID, A:D is my data range, 3 means return the value from the 3rd column, and FALSE means exact match.",
+      "timestamp": "2024-01-15T14:33:30Z"
+    },
+    {
+      "role": "interviewer",
+      "content": "✅ Excellent answer! You demonstrate strong Excel knowledge.\n\n**Question 3:** How would you create a pivot table to analyze sales data by region and product?",
+      "timestamp": "2024-01-15T14:33:45Z"
+    },
+    {
+      "role": "candidate",
+      "content": "To create a pivot table, I'd first select my data range, then go to Insert > PivotTable. I'd drag Region to the Rows area and Product to the Columns area. Then I'd drag Sales Amount to the Values area, which would automatically sum the values. This would give me a cross-tabulation showing total sales for each product by region. I could also add filters by dragging fields to the Filters area.",
+      "timestamp": "2024-01-15T14:35:00Z"
+    },
+    {
+      "role": "interviewer",
+      "content": "👍 Good answer! You show solid understanding.\n\n**Question 4:** How would you create a nested IF statement with multiple conditions?",
+      "timestamp": "2024-01-15T14:35:15Z"
+    },
+    {
+      "role": "candidate",
+      "content": "A nested IF statement uses multiple IF functions inside each other. For example, to assign grades based on scores: =IF(A1>=90,\"A\",IF(A1>=80,\"B\",IF(A1>=70,\"C\",IF(A1>=60,\"D\",\"F\")))). Excel evaluates from the first condition - if A1 is 90 or higher, it returns A, otherwise it checks the next condition. You can have up to 64 nested IFs in newer Excel versions.",
+      "timestamp": "2024-01-15T14:36:30Z"
+    },
+    {
+      "role": "interviewer",
+      "content": "👍 Good answer! You show solid understanding.\n\n**Question 5:** What are Excel macros and how would you create a simple macro to automate a task?",
+      "timestamp": "2024-01-15T14:36:45Z"
+    },
+    {
+      "role": "candidate",
+      "content": "Excel macros are automated sequences of actions written in VBA (Visual Basic for Applications). To create one, I'd go to Developer tab > Record Macro, give it a name, then perform the actions I want to automate. Excel records these as VBA code. I can also write macros manually in the VBA editor. For example, a simple macro might format selected cells or copy data between worksheets. Macros are useful for repetitive tasks.",
+      "timestamp": "2024-01-15T14:38:00Z"
+    },
+    {
+      "role": "interviewer",
+      "content": "👍 Good answer! You show solid understanding.\n\nThank you for that answer! I have enough information to provide you with feedback.\n\nLet me generate your performance report...",
+      "timestamp": "2024-01-15T14:38:15Z"
+    }
+  ],
+  "evaluations": [
+    {
+      "score": 9,
+      "points": 13,
+      "technical_accuracy": 9,
+      "practical_application": 8,
+      "communication": 9,
+      "advanced_knowledge": 7,
+      "feedback": "Excellent understanding of cell references. Provided clear examples and explained mixed references, demonstrating comprehensive knowledge.",
+      "strengths": ["Clear explanation with examples", "Mentioned mixed references", "Accurate technical details"],
+      "improvements": ["Could mention F4 key shortcut for toggling reference types"],
+      "question": "What is the difference between a relative and absolute cell reference in Excel?",
+      "answer": "A relative cell reference changes when you copy the formula to another cell. For example, if I have =A1+B1 in cell C1 and copy it to C2, it becomes =A2+B2. An absolute reference uses dollar signs like $A$1 and stays the same when copied. So $A$1+$B$1 would remain the same in any cell. You can also have mixed references like $A1 or A$1 where only the column or row is absolute."
+    },
+    {
+      "score": 8,
+      "points": 12,
+      "technical_accuracy": 8,
+      "practical_application": 9,
+      "communication": 8,
+      "advanced_knowledge": 6,
+      "feedback": "Strong understanding of VLOOKUP with correct syntax and practical example. Good explanation of the FALSE parameter for exact match.",
+      "strengths": ["Correct syntax provided", "Practical business example", "Explained exact vs approximate match"],
+      "improvements": ["Could mention INDEX-MATCH as an alternative", "Could explain limitations of VLOOKUP"],
+      "question": "Explain how VLOOKUP works and provide an example scenario where you'd use it.",
+      "answer": "VLOOKUP searches for a value in the first column of a table and returns a value from a specified column in the same row. The syntax is VLOOKUP(lookup_value, table_array, col_index_num, range_lookup). For example, if I have employee data and want to find someone's department based on their ID, I'd use =VLOOKUP(A2,Employees!A:D,3,FALSE) where A2 is the employee ID, A:D is my data range, 3 means return the value from the 3rd column, and FALSE means exact match."
+    },
+    {
+      "score": 7,
+      "points": 10,
+      "technical_accuracy": 7,
+      "practical_application": 8,
+      "communication": 7,
+      "advanced_knowledge": 5,
+      "feedback": "Good basic understanding of pivot tables. Correctly identified key steps and drag-and-drop interface.",
+      "strengths": ["Correct creation process", "Mentioned cross-tabulation concept", "Included filters option"],
+      "improvements": ["Could mention pivot table tools and options", "Could discuss pivot table best practices"],
+      "question": "How would you create a pivot table to analyze sales data by region and product?",
+      "answer": "To create a pivot table, I'd first select my data range, then go to Insert > PivotTable. I'd drag Region to the Rows area and Product to the Columns area. Then I'd drag Sales Amount to the Values area, which would automatically sum the values. This would give me a cross-tabulation showing total sales for each product by region. I could also add filters by dragging fields to the Filters area."
+    },
+    {
+      "score": 6,
+      "points": 9,
+      "technical_accuracy": 6,
+      "practical_application": 7,
+      "communication": 6,
+      "advanced_knowledge": 5,
+      "feedback": "Solid understanding of nested IF statements with a practical example. Mentioned the 64 IF limit which shows good knowledge.",
+      "strengths": ["Provided working example", "Mentioned Excel version limitations", "Good practical scenario"],
+      "improvements": ["Could suggest alternatives like IFS function or lookup tables", "Could mention performance considerations"],
+      "question": "How would you create a nested IF statement with multiple conditions?",
+      "answer": "A nested IF statement uses multiple IF functions inside each other. For example, to assign grades based on scores: =IF(A1>=90,\"A\",IF(A1>=80,\"B\",IF(A1>=70,\"C\",IF(A1>=60,\"D\",\"F\")))). Excel evaluates from the first condition - if A1 is 90 or higher, it returns A, otherwise it checks the next condition. You can have up to 64 nested IFs in newer Excel versions."
+    },
+    {
+      "score": 6,
+      "points": 9,
+      "technical_accuracy": 6,
+      "practical_application": 6,
+      "communication": 6,
+      "advanced_knowledge": 6,
+      "feedback": "Basic understanding of macros and VBA. Correctly explained recording process and gave general use cases.",
+      "strengths": ["Understood recording vs manual coding", "Mentioned VBA", "Gave practical examples"],
+      "improvements": ["Could provide specific VBA syntax example", "Could discuss macro security considerations", "Could mention macro-enabled file formats"],
+      "question": "What are Excel macros and how would you create a simple macro to automate a task?",
+      "answer": "Excel macros are automated sequences of actions written in VBA (Visual Basic for Applications). To create one, I'd go to Developer tab > Record Macro, give it a name, then perform the actions I want to automate. Excel records these as VBA code. I can also write macros manually in the VBA editor. For example, a simple macro might format selected cells or copy data between worksheets. Macros are useful for repetitive tasks."
+    }
+  ]
+}
